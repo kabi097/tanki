@@ -41,3 +41,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Ground
+    uniqueID: 2437709871
+    locked: 0
+  - name: Brick
+    uniqueID: 1890231477
+    locked: 0
+  - name: Water
+    uniqueID: 2777727791
+    locked: 0
+  - name: Trees
+    uniqueID: 4068824299
+    locked: 0
+  - name: Boundary
+    uniqueID: 4002542445
+    locked: 0
