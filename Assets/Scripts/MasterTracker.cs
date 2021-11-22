@@ -31,4 +31,9 @@ public class MasterTracker : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        FindObjectOfType<AudioManager>().Play("LevelIntro"); //Plays level intro
+    }
+
 }
