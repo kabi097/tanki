@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Movement // Inherits from the Movement class
+public class Player : Movement, IKillable, IDamageble // Inherits from the Movement class
 {
     float h, v; // Variables for the movement inputs
     Rigidbody2D rb2d;
+
+    public Transform firePoint;
+    public GameObject bulletPrefab;
 
     void Start()
     {
@@ -19,6 +22,21 @@ public class Player : Movement // Inherits from the Movement class
     {
         h = Input.GetAxisRaw("Horizontal");
         v = Input.GetAxisRaw("Vertical");
+
+        if (Input.GetButtonDown("Fire1")) 
+        {
+            Shoot();
+        }
+    }
+
+    public void Damage(int damageTaken)
+    {
+        Debug.Log(damageTaken);
+    }
+
+    public void Kill() 
+    {
+        Debug.Log("killed");
     }
 
     void FixedUpdate()
@@ -49,5 +67,10 @@ public class Player : Movement // Inherits from the Movement class
             FindObjectOfType<AudioManager>().Stop("Moving"); //Stops moving sfx
             FindObjectOfType<AudioManager>().Play("NotMoving"); //Plays not moving sfx
         }
+    }
+
+    void Shoot() 
+    {
+        Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
     }
 }
