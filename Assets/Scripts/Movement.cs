@@ -75,7 +75,7 @@ public abstract class Movement : MonoBehaviour // Abstract class so it would nee
         }
 
         isMoving = false;
-
     }
+
 }
 

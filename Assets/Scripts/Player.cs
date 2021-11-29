@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Movement, IKillable, IDamageble // Inherits from the Movement class
+public class Player : Tank, IKillable, IDamageble // Inherits from the Movement class
 {
     float h, v; // Variables for the movement inputs
     Rigidbody2D rb2d;
 
-    public Transform firePoint;
-    public GameObject bulletPrefab;
-
+    public int speed = 5;
+    protected bool isMoving = false; // Flag to ensure that the movement before has stopped and new one can be started
+    
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>(); // Gets current object rigidbody2d element
@@ -27,16 +27,6 @@ public class Player : Movement, IKillable, IDamageble // Inherits from the Movem
         {
             Shoot();
         }
-    }
-
-    public void Damage(int damageTaken)
-    {
-        Debug.Log(damageTaken);
-    }
-
-    public void Kill() 
-    {
-        Debug.Log("killed");
     }
 
     void FixedUpdate()
@@ -69,8 +59,70 @@ public class Player : Movement, IKillable, IDamageble // Inherits from the Movem
         }
     }
 
-    void Shoot() 
+    protected IEnumerator MoveHorizontal (float movementHorizontal, Rigidbody2D rb2d) // Movement functions in coroutines to make the movement smooth
     {
-        Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        isMoving = true;
+
+        transform.position = new Vector2(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y));
+
+        Quaternion rotation = Quaternion.Euler(0, 0, -movementHorizontal * 90f); // Movement's rotation
+        transform.rotation = rotation;
+
+        float movementProgress = 0f;  // Progress of one movement (clamped later to (0.0, 1.0)
+        Vector2 movement, endPos;
+
+        while (movementProgress < Mathf.Abs(movementHorizontal))
+        {
+            movementProgress += speed * Time.deltaTime;
+            movementProgress = Mathf.Clamp(movementProgress, 0f, 1f); 
+            movement = new Vector2(speed * Time.deltaTime * movementHorizontal, 0f);
+            endPos = rb2d.position + movement;
+
+            if (movementProgress == 1) endPos = new Vector2(Mathf.Round(endPos.x), endPos.y);
+            rb2d.MovePosition(endPos); // Moving the object
+
+            yield return new WaitForFixedUpdate();
+        }
+
+        isMoving = false;
+
+    }
+    protected IEnumerator MoveVertical(float movementVertical, Rigidbody2D rb2d)
+    {
+        isMoving = true;
+
+        transform.position = new Vector2(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y));
+
+        Quaternion rotation; // Movement's rotation
+
+        if (movementVertical < 0)
+        {
+            rotation = Quaternion.Euler(0, 0, movementVertical * 180f);
+        }
+        else
+        {
+            rotation = Quaternion.Euler(0, 0, 0);
+        }
+        transform.rotation = rotation;
+
+        float movementProgress = 0f; // Progress of one movement (clamped later to (0.0, 1.0)
+        Vector2 endPos, movement;
+
+        while (movementProgress < Mathf.Abs(movementVertical))
+        {
+
+            movementProgress += speed * Time.deltaTime;
+            movementProgress = Mathf.Clamp(movementProgress, 0f, 1f);
+
+            movement = new Vector2(0f, speed * Time.deltaTime * movementVertical);
+            endPos = rb2d.position + movement;
+
+            if (movementProgress == 1) endPos = new Vector2(endPos.x, Mathf.Round(endPos.y));
+            rb2d.MovePosition(endPos); // moving the object
+            yield return new WaitForFixedUpdate();
+
+        }
+
+        isMoving = false;
     }
 }

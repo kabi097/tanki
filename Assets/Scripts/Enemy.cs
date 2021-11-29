@@ -2,12 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, IKillable, IDamageble
+public class Enemy : Tank
 {
-    public Transform firePoint;
-    public GameObject bulletPrefab;
-    public int health = 200;
-
     float elapsed = 0f;
 
     // public GameObject deathEffect;
@@ -18,25 +14,5 @@ public class Enemy : MonoBehaviour, IKillable, IDamageble
             elapsed = elapsed % 1f;
             Shoot();
         }
-    }
-
-    public void Damage(int damage) 
-    {
-        health += damage;
-
-        if (health <= 0) {
-            Kill();
-        }
-    }
-
-    public void Kill() 
-    {
-        // Instantiate(deathEffect, transform.position, Quaternion.identity);
-        Destroy(gameObject);
-    }
-    
-    void Shoot() 
-    {
-        Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
     }
 }
