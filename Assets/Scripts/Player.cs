@@ -63,7 +63,7 @@ public class Player : Tank, IKillable, IDamageble // Inherits from the Movement 
     {
         isMoving = true;
 
-        transform.position = new Vector2(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y));
+        //transform.position = new Vector2(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y));
 
         Quaternion rotation = Quaternion.Euler(0, 0, -movementHorizontal * 90f); // Movement's rotation
         transform.rotation = rotation;
@@ -71,14 +71,14 @@ public class Player : Tank, IKillable, IDamageble // Inherits from the Movement 
         float movementProgress = 0f;  // Progress of one movement (clamped later to (0.0, 1.0)
         Vector2 movement, endPos;
 
-        while (movementProgress < Mathf.Abs(movementHorizontal))
+        while (movementProgress < 0.1f*Mathf.Abs(movementHorizontal))
         {
             movementProgress += speed * Time.deltaTime;
             movementProgress = Mathf.Clamp(movementProgress, 0f, 1f); 
             movement = new Vector2(speed * Time.deltaTime * movementHorizontal, 0f);
             endPos = rb2d.position + movement;
 
-            if (movementProgress == 1) endPos = new Vector2(Mathf.Round(endPos.x), endPos.y);
+            //if (movementProgress == 1) endPos = new Vector2(Mathf.Round(endPos.x), endPos.y);
             rb2d.MovePosition(endPos); // Moving the object
 
             yield return new WaitForFixedUpdate();
@@ -91,7 +91,7 @@ public class Player : Tank, IKillable, IDamageble // Inherits from the Movement 
     {
         isMoving = true;
 
-        transform.position = new Vector2(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y));
+        //transform.position = new Vector2(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y));
 
         Quaternion rotation; // Movement's rotation
 
@@ -108,7 +108,7 @@ public class Player : Tank, IKillable, IDamageble // Inherits from the Movement 
         float movementProgress = 0f; // Progress of one movement (clamped later to (0.0, 1.0)
         Vector2 endPos, movement;
 
-        while (movementProgress < Mathf.Abs(movementVertical))
+        while (movementProgress < 0.1f*Mathf.Abs(movementVertical))
         {
 
             movementProgress += speed * Time.deltaTime;
@@ -117,7 +117,7 @@ public class Player : Tank, IKillable, IDamageble // Inherits from the Movement 
             movement = new Vector2(0f, speed * Time.deltaTime * movementVertical);
             endPos = rb2d.position + movement;
 
-            if (movementProgress == 1) endPos = new Vector2(endPos.x, Mathf.Round(endPos.y));
+            //if (movementProgress == 1) endPos = new Vector2(endPos.x, Mathf.Round(endPos.y));
             rb2d.MovePosition(endPos); // moving the object
             yield return new WaitForFixedUpdate();
 

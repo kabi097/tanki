@@ -8,13 +8,13 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Brick
+  - Boundary
+  - Objects
+  - Trees
   - 
   - 
   - 
@@ -49,6 +49,9 @@ TagManager:
     locked: 0
   - name: Water
     uniqueID: 2777727791
+    locked: 0
+  - name: Objects
+    uniqueID: 31707299
     locked: 0
   - name: Trees
     uniqueID: 4068824299

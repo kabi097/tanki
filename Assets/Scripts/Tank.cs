@@ -8,7 +8,7 @@ public class Tank : MonoBehaviour, IKillable, IDamageble
     public GameObject bulletPrefab;
     public int health = 200;
 
-    float elapsed = 0f;
+    
 
     public GameObject deathEffect;
 
