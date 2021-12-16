@@ -9,6 +9,10 @@ public class Player : Tank, IKillable, IDamageble // Inherits from the Movement 
 
     public int speed = 5;
     protected bool isMoving = false; // Flag to ensure that the movement before has stopped and new one can be started
+
+    public float fireTimer = 3.0f;
+
+    private bool canFire = true;
     
     void Start()
     {
@@ -25,7 +29,13 @@ public class Player : Tank, IKillable, IDamageble // Inherits from the Movement 
 
         if (Input.GetButtonDown("Fire1")) 
         {
-            Shoot();
+            if (canFire)
+            {
+                Shoot();
+                canFire = false;
+                StartCoroutine(FireEnable());
+
+            }
         }
     }
 
@@ -124,5 +134,11 @@ public class Player : Tank, IKillable, IDamageble // Inherits from the Movement 
         }
 
         isMoving = false;
+    }
+
+    IEnumerator FireEnable()
+    {
+        yield return new WaitForSeconds(fireTimer);
+        canFire = true;
     }
 }

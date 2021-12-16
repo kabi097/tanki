@@ -64,7 +64,6 @@ public class EnemyAI : Movement
     private void OnCollisionEnter2D(Collision2D collision)
     {
         RandomDirection();
-        Debug.Log("col");
     }
 
     private void FixedUpdate()
