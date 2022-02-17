@@ -9,6 +9,7 @@ TagManager:
   - Water
   - Tank
   - Tree
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -22,8 +23,8 @@ TagManager:
   - Trees
   - Enemy
   - Bullets
-  - 
-  - 
+  - Player
+  - EnemyBullets
   - 
   - 
   - 

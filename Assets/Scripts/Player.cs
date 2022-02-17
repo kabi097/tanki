@@ -27,10 +27,11 @@ public class Player : Tank, IKillable, IDamageble // Inherits from the Movement 
         h = Input.GetAxisRaw("Horizontal");
         v = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetButtonDown("Fire1")) 
+        if (Input.GetButtonDown("Fire1") && GPmanager.can_move) 
         {
             if (canFire)
             {
+                StartCoroutine(Cshake.Shake(0.025f, 0.18f));
                 Shoot();
                 canFire = false;
                 StartCoroutine(FireEnable());
@@ -41,31 +42,34 @@ public class Player : Tank, IKillable, IDamageble // Inherits from the Movement 
 
     void FixedUpdate()
     {
-        //Calls the moving functions if axis inputs are detected and object isn't currently moving
-        if (h != 0 && !isMoving)
+        if (GPmanager.can_move)
         {
-            StartCoroutine(MoveHorizontal(h, rb2d));
-
-            if(!FindObjectOfType<AudioManager>().IsPlaying("Moving")) //Checks if the sound is not already playing
+            //Calls the moving functions if axis inputs are detected and object isn't currently moving
+            if (h != 0 && !isMoving)
             {
-                FindObjectOfType<AudioManager>().Play("Moving"); //Plays moving sfx
-                FindObjectOfType<AudioManager>().Stop("NotMoving"); //Stops standing still sfx
-            }
-        }
-        else if (v != 0 && !isMoving)
-        {
-            StartCoroutine(MoveVertical(v, rb2d));
+                StartCoroutine(MoveHorizontal(h, rb2d));
 
-            if (!FindObjectOfType<AudioManager>().IsPlaying("Moving")) //Checks if the sound is not already playing
-            {
-                FindObjectOfType<AudioManager>().Play("Moving"); //Plays moving sfx
-                FindObjectOfType<AudioManager>().Stop("NotMoving"); //Stops standing still sfx
+                if (!FindObjectOfType<AudioManager>().IsPlaying("Moving")) //Checks if the sound is not already playing
+                {
+                    FindObjectOfType<AudioManager>().Play("Moving"); //Plays moving sfx
+                    FindObjectOfType<AudioManager>().Stop("NotMoving"); //Stops standing still sfx
+                }
             }
-        }
-        else if(!isMoving && !FindObjectOfType<AudioManager>().IsPlaying("NotMoving"))
-        {
-            FindObjectOfType<AudioManager>().Stop("Moving"); //Stops moving sfx
-            FindObjectOfType<AudioManager>().Play("NotMoving"); //Plays not moving sfx
+            else if (v != 0 && !isMoving)
+            {
+                StartCoroutine(MoveVertical(v, rb2d));
+
+                if (!FindObjectOfType<AudioManager>().IsPlaying("Moving")) //Checks if the sound is not already playing
+                {
+                    FindObjectOfType<AudioManager>().Play("Moving"); //Plays moving sfx
+                    FindObjectOfType<AudioManager>().Stop("NotMoving"); //Stops standing still sfx
+                }
+            }
+            else if (!isMoving && !FindObjectOfType<AudioManager>().IsPlaying("NotMoving"))
+            {
+                FindObjectOfType<AudioManager>().Stop("Moving"); //Stops moving sfx
+                FindObjectOfType<AudioManager>().Play("NotMoving"); //Plays not moving sfx
+            }
         }
     }
 

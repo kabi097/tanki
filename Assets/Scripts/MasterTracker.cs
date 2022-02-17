@@ -18,6 +18,8 @@ public class MasterTracker : MonoBehaviour
     public static int stageNumber;          //amount of destroyed enemy tanks, current stage number and player score
     public static int playerScore = 0;
 
+    public static bool stageCleared = false;
+
     private void Awake()
     {
         if(instance == null)

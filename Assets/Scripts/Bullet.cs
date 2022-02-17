@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
     public bool destroySteel = false;
 
     public Rigidbody2D rb;
-    
+
 
     [SerializeField]
     public float speed = 20f;
@@ -27,12 +27,10 @@ public class Bullet : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D hitInfo) 
     {
-        Debug.Log("hit" + hitInfo.gameObject.name);
         rb.velocity = Vector2.zero;
 
         tilemap = hitInfo.gameObject.GetComponent<Tilemap>();
 
-        Debug.Log(hitInfo.gameObject.tag);
         
         if (hitInfo.gameObject.GetComponent<IDamageble>() != null)
         {
