@@ -31,8 +31,19 @@ public class Bullet : MonoBehaviour
 
         tilemap = hitInfo.gameObject.GetComponent<Tilemap>();
 
-        
-        if (hitInfo.gameObject.GetComponent<IDamageble>() != null)
+       if ((hitInfo.gameObject == brickGameObject) || (destroySteel && hitInfo.gameObject == steelGameObject))
+        {
+            FindObjectOfType<AudioManager>().Play("BlockSmash"); //Plays moving sfx
+            Vector3 hitPosition = Vector3.zero;
+            foreach (ContactPoint2D hit in hitInfo.contacts)
+            {
+                hitPosition.x = hit.point.x - 0.01f * hit.normal.x;
+                hitPosition.y = hit.point.y - 0.01f * hit.normal.y;
+                tilemap.SetTile(tilemap.WorldToCell(hitPosition), null);
+            }
+           
+        }
+        else if (hitInfo.gameObject.GetComponent<IDamageble>() != null)
         {
             IDamageble damageble = hitInfo.gameObject.GetComponent<IDamageble>();
 
@@ -43,16 +54,9 @@ public class Bullet : MonoBehaviour
             }
             Destroy(gameObject);
         }
-        if ((hitInfo.gameObject == brickGameObject) || (destroySteel && hitInfo.gameObject == steelGameObject))
+        else
         {
-            Vector3 hitPosition = Vector3.zero;
-            foreach (ContactPoint2D hit in hitInfo.contacts)
-            {
-                hitPosition.x = hit.point.x - 0.01f * hit.normal.x;
-                hitPosition.y = hit.point.y - 0.01f * hit.normal.y;
-                tilemap.SetTile(tilemap.WorldToCell(hitPosition), null);
-            }
-           
+            FindObjectOfType<AudioManager>().Play("WallHit"); //Plays moving sfx
         }
         Destroy(gameObject);
 

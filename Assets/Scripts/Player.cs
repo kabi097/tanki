@@ -31,7 +31,7 @@ public class Player : Tank, IKillable, IDamageble // Inherits from the Movement 
         {
             if (canFire)
             {
-                StartCoroutine(Cshake.Shake(0.025f, 0.18f));
+                FindObjectOfType<AudioManager>().Play("Shot"); //Plays moving sfx
                 Shoot();
                 canFire = false;
                 StartCoroutine(FireEnable());

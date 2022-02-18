@@ -36,15 +36,17 @@ public class Tank : MonoBehaviour, IKillable, IDamageble
         if (gameObject.name == "Player")
         {
             StartCoroutine(Cshake.Shake(0.05f, 0.3f));
+            FindObjectOfType<AudioManager>().Play("BigHit"); //Plays moving sfx
         }
         else
         {
-            StartCoroutine(Cshake.Shake(0.015f, 0.15f));
+            FindObjectOfType<AudioManager>().Play("LowHit"); //Plays moving sfx
         }
 
-        health += damage;
+            health += damage;
         if (health <= 0)
         {
+            FindObjectOfType<AudioManager>().Play("Destroyed"); //Plays moving sfx
             Kill();
         }
     }
