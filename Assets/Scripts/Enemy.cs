@@ -6,14 +6,22 @@ public class Enemy : Tank
 {
     float elapsed = 0f;
 
-    public GameObject bulletPrefabEnemy;
 
+    public GameObject bulletPrefabEnemy;
+    public float shootingSpeed = 2f;
+    public float shootingRangeSpeed = 0.5f;
+
+
+    public bool IsAlreadyDead()
+    {
+        return alreadyDead;
+    }
     // public GameObject deathEffect;
     private void Update() 
     {
         elapsed += Time.deltaTime;
-        if (elapsed >= 1f && GPmanager.can_move) {
-            elapsed = elapsed % 1f;
+        if (elapsed >= (shootingSpeed + Random.Range(-shootingRangeSpeed, shootingRangeSpeed)) && GPmanager.can_move && !alreadyDead) {
+            elapsed -= shootingSpeed;
             EnemyShoot();
         }
     }

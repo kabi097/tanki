@@ -24,25 +24,28 @@ public class Player : Tank, IKillable, IDamageble // Inherits from the Movement 
     // Update is called once per frame
     void Update()
     {
-        h = Input.GetAxisRaw("Horizontal");
-        v = Input.GetAxisRaw("Vertical");
-
-        if (Input.GetButtonDown("Fire1") && GPmanager.can_move) 
+        if (!alreadyDead)
         {
-            if (canFire)
-            {
-                FindObjectOfType<AudioManager>().Play("Shot"); //Plays moving sfx
-                Shoot();
-                canFire = false;
-                StartCoroutine(FireEnable());
+            h = Input.GetAxisRaw("Horizontal");
+            v = Input.GetAxisRaw("Vertical");
 
+            if (Input.GetButtonDown("Fire1") && GPmanager.can_move)
+            {
+                if (canFire)
+                {
+                    FindObjectOfType<AudioManager>().Play("Shot"); //Plays moving sfx
+                    Shoot();
+                    canFire = false;
+                    StartCoroutine(FireEnable());
+
+                }
             }
         }
     }
 
     void FixedUpdate()
     {
-        if (GPmanager.can_move)
+        if (GPmanager.can_move && !alreadyDead)
         {
             //Calls the moving functions if axis inputs are detected and object isn't currently moving
             if (h != 0 && !isMoving)

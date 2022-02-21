@@ -9,9 +9,14 @@ public class Bullet : MonoBehaviour
 
     public Rigidbody2D rb;
 
+    public ParticleSystem ExplosionParticles;
+
+    public ParticleSystem TilesParticles;
 
     [SerializeField]
     public float speed = 20f;
+
+    GamePlayManager GPM;
 
     GameObject brickGameObject, steelGameObject;
     Tilemap tilemap;
@@ -31,7 +36,7 @@ public class Bullet : MonoBehaviour
 
         tilemap = hitInfo.gameObject.GetComponent<Tilemap>();
 
-       if ((hitInfo.gameObject == brickGameObject) || (destroySteel && hitInfo.gameObject == steelGameObject))
+        if ((hitInfo.gameObject == brickGameObject) || (destroySteel && hitInfo.gameObject == steelGameObject))
         {
             FindObjectOfType<AudioManager>().Play("BlockSmash"); //Plays moving sfx
             Vector3 hitPosition = Vector3.zero;
@@ -39,10 +44,16 @@ public class Bullet : MonoBehaviour
             {
                 hitPosition.x = hit.point.x - 0.01f * hit.normal.x;
                 hitPosition.y = hit.point.y - 0.01f * hit.normal.y;
-                tilemap.SetTile(tilemap.WorldToCell(hitPosition), null);
+
+                Instantiate(TilesParticles, tilemap.GetCellCenterWorld(tilemap.WorldToCell(hitPosition)), Quaternion.Euler(0, 0, 0));                     
             }
            
         }
+        else if (hitInfo.gameObject == steelGameObject)
+        {
+           FindObjectOfType<AudioManager>().Play("WallHit"); //Plays moving sfx
+        }
+
         else if (hitInfo.gameObject.GetComponent<IDamageble>() != null)
         {
             IDamageble damageble = hitInfo.gameObject.GetComponent<IDamageble>();
@@ -58,8 +69,8 @@ public class Bullet : MonoBehaviour
         {
             FindObjectOfType<AudioManager>().Play("WallHit"); //Plays moving sfx
         }
+        Instantiate(ExplosionParticles, gameObject.transform.position, gameObject.transform.rotation);
         Destroy(gameObject);
-
     }
-  
+
 }

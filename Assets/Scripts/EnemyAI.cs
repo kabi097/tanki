@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyAI : Movement
 {
     public GamePlayManager GPmanager;
+    public Enemy enemy;
     Rigidbody2D rb2d;
     float h, v;
     [SerializeField]
@@ -69,7 +70,7 @@ public class EnemyAI : Movement
 
     private void FixedUpdate()
     {
-        if (GPmanager.can_move)
+        if (GPmanager.can_move && !enemy.IsAlreadyDead())
         {
             if (v != 0 && isMoving == false) StartCoroutine(MoveVertical(v, rb2d));
             else if (h != 0 && isMoving == false) StartCoroutine(MoveHorizontal(h, rb2d));
