@@ -4,19 +4,21 @@ using UnityEngine;
 
 public abstract class Movement : MonoBehaviour // Abstract class so it would need another non-abstract class inheriting from it to exist
 {
+    public GameObject body;
 
     public int speed = 5;
     protected bool isMoving = false; // Flag to ensure that the movement before has stopped and new one can be started
-    
-   
+
+
+
     protected IEnumerator MoveHorizontal (float movementHorizontal, Rigidbody2D rb2d) // Movement functions in coroutines to make the movement smooth
     {
         isMoving = true;
 
        //transform.position = new Vector2(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y));
 
-        Quaternion rotation = Quaternion.Euler(0, 0, -movementHorizontal * 90f); // Movement's rotation
-        transform.rotation = rotation;
+        Quaternion rotation = Quaternion.Euler(0, 0, -movementHorizontal * 90f - 90f); // Movement's rotation
+        body.transform.rotation = rotation;
 
         float movementProgress = 0f;  // Progress of one movement (clamped later to (0.0, 1.0)
         Vector2 movement, endPos;
@@ -48,13 +50,13 @@ public abstract class Movement : MonoBehaviour // Abstract class so it would nee
 
         if (movementVertical < 0)
         {
-            rotation = Quaternion.Euler(0, 0, movementVertical * 180f);
+            rotation = Quaternion.Euler(0, 0, movementVertical * 180f - 90f);
         }
         else
         {
-            rotation = Quaternion.Euler(0, 0, 0);
+            rotation = Quaternion.Euler(0, 0, -90f);
         }
-        transform.rotation = rotation;
+        body.transform.rotation = rotation;
 
         float movementProgress = 0f; // Progress of one movement (clamped later to (0.0, 1.0)
         Vector2 endPos, movement;

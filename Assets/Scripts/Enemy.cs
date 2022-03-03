@@ -12,6 +12,10 @@ public class Enemy : Tank
     public float shootingRangeSpeed = 0.5f;
 
 
+    private void Start()
+    {
+        healthBar.SetMaxHealth(health);
+    }
     public bool IsAlreadyDead()
     {
         return alreadyDead;

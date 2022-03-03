@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyAI : Movement
 {
+
     public GamePlayManager GPmanager;
     public Enemy enemy;
     Rigidbody2D rb2d;

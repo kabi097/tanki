@@ -7,9 +7,14 @@ public class Tank : MonoBehaviour, IKillable, IDamageble
 {
     public Transform firePoint;
     public GameObject bulletPrefab;
+
+    public GameObject body;
+
     public int health = 200;
 
     public SpriteRenderer sprite;
+
+    public HealthBarScript healthBar;
 
     public CameraShake Cshake;
 
@@ -18,6 +23,9 @@ public class Tank : MonoBehaviour, IKillable, IDamageble
     public ParticleSystem ExplosionParticles;
 
     protected bool alreadyDead = false;
+
+
+
 
     public void Kill() 
     {
@@ -32,6 +40,8 @@ public class Tank : MonoBehaviour, IKillable, IDamageble
     {
         if (!alreadyDead)
         {
+           
+
             if (gameObject.name == "Player")
             {
                 StartCoroutine(Cshake.Shake(0.05f, 0.3f));
@@ -43,6 +53,8 @@ public class Tank : MonoBehaviour, IKillable, IDamageble
             }
 
             health += damage;
+            healthBar.SetHealth(health);
+
             if (health <= 0)
             {
                 alreadyDead = true;
