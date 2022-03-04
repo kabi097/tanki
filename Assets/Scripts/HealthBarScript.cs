@@ -6,6 +6,34 @@ using UnityEngine.UI;
 public class HealthBarScript : MonoBehaviour
 {
     public Slider slider;
+    public Image fill;
+    public Image border;
+
+    float showTime = 0;
+
+
+
+    private void Update()
+    {
+        if (showTime >= 0)
+        {
+            if (showTime > 1)
+            {
+                SetAlpha(1);
+            }
+            else
+            {
+                SetAlpha(Mathf.Lerp(1, 0, 1 - showTime));
+            }
+            showTime -= Time.deltaTime;
+        }
+        else
+        {
+            SetAlpha(0);
+            showTime = 0;
+        }
+    }
+
     public void SetMaxHealth(int health)
     {
         slider.maxValue = health;
@@ -16,4 +44,15 @@ public class HealthBarScript : MonoBehaviour
         slider.value = health;
     }
 
+    public void showBar(float durance)
+    {
+        showTime = durance;
+    }
+
+    public void SetAlpha(float alpha)
+    {
+        var tempColor = new Color(1, 1, 1, alpha);
+        fill.color = tempColor;
+        border.color = tempColor;
+    }
 }

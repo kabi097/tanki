@@ -6,6 +6,8 @@ public abstract class Movement : MonoBehaviour // Abstract class so it would nee
 {
     public GameObject body;
 
+    public Canvas canvas;
+
     public int speed = 5;
     protected bool isMoving = false; // Flag to ensure that the movement before has stopped and new one can be started
 
@@ -17,8 +19,10 @@ public abstract class Movement : MonoBehaviour // Abstract class so it would nee
 
        //transform.position = new Vector2(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y));
 
-        Quaternion rotation = Quaternion.Euler(0, 0, -movementHorizontal * 90f - 90f); // Movement's rotation
-        body.transform.rotation = rotation;
+        Quaternion rotation = Quaternion.Euler(0, 0, -movementHorizontal * 90f); // Movement's rotation
+        transform.rotation = rotation;
+        canvas.transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, 0);
+        canvas.transform.rotation = Quaternion.Euler(0, 0, 0);
 
         float movementProgress = 0f;  // Progress of one movement (clamped later to (0.0, 1.0)
         Vector2 movement, endPos;
@@ -50,13 +54,15 @@ public abstract class Movement : MonoBehaviour // Abstract class so it would nee
 
         if (movementVertical < 0)
         {
-            rotation = Quaternion.Euler(0, 0, movementVertical * 180f - 90f);
+            rotation = Quaternion.Euler(0, 0, movementVertical * 180f);
         }
         else
         {
-            rotation = Quaternion.Euler(0, 0, -90f);
+            rotation = Quaternion.Euler(0, 0, 0);
         }
-        body.transform.rotation = rotation;
+        transform.rotation = rotation;
+        canvas.transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, 0);
+        canvas.transform.rotation = Quaternion.Euler(0, 0, 0);
 
         float movementProgress = 0f; // Progress of one movement (clamped later to (0.0, 1.0)
         Vector2 endPos, movement;

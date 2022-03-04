@@ -10,6 +10,8 @@ public class Enemy : Tank
     public GameObject bulletPrefabEnemy;
     public float shootingSpeed = 2f;
     public float shootingRangeSpeed = 0.5f;
+    public bool doubleShotEnable = false;
+    bool shooted = false;
 
 
     private void Start()
@@ -24,8 +26,14 @@ public class Enemy : Tank
     private void Update() 
     {
         elapsed += Time.deltaTime;
+        if(elapsed >= 0.1f && shooted && doubleShotEnable)
+        {
+            if(Random.value > 0.5f) EnemyShoot();
+            shooted = false;
+        }
         if (elapsed >= (shootingSpeed + Random.Range(-shootingRangeSpeed, shootingRangeSpeed)) && GPmanager.can_move && !alreadyDead) {
-            elapsed -= shootingSpeed;
+            elapsed = 0;
+            shooted = true;
             EnemyShoot();
         }
     }

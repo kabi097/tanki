@@ -10,6 +10,8 @@ public class Tank : MonoBehaviour, IKillable, IDamageble
 
     public GameObject body;
 
+
+
     public int health = 200;
 
     public SpriteRenderer sprite;
@@ -40,7 +42,8 @@ public class Tank : MonoBehaviour, IKillable, IDamageble
     {
         if (!alreadyDead)
         {
-           
+
+            healthBar.showBar(2);
 
             if (gameObject.name == "Player")
             {
