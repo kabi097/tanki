@@ -9,6 +9,8 @@ public class Player : Tank, IKillable, IDamageble // Inherits from the Movement 
 
     public Canvas canvas;
 
+    public HealthBarScript UIhealth;
+
     public int speed = 5;
     protected bool isMoving = false; // Flag to ensure that the movement before has stopped and new one can be started
 
@@ -21,12 +23,13 @@ public class Player : Tank, IKillable, IDamageble // Inherits from the Movement 
         healthBar.SetMaxHealth(health);
         rb2d = GetComponent<Rigidbody2D>(); // Gets current object rigidbody2d element
         FindObjectOfType<AudioManager>().Play("NotMoving"); //Plays not moving sfx
+        UIhealth.SetMaxHealth(health);
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        UIhealth.SetHealth(health);
         if (!alreadyDead)
         {
             h = Input.GetAxisRaw("Horizontal");
