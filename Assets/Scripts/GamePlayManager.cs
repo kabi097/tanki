@@ -18,6 +18,8 @@ public class GamePlayManager : MonoBehaviour
 
     public bool can_move = false;
 
+    bool waitForDone = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,16 +32,25 @@ public class GamePlayManager : MonoBehaviour
         if (GameObject.FindWithTag("Enemy") == null)
         {
             MasterTracker.stageCleared = true;
-            LevelCompleted();
+            StartCoroutine(WaitFor(2.0f));
+            if (waitForDone)
+            {
+                waitForDone = false;
+                FindObjectOfType<AudioManager>().Stop("NotMoving");
+                FindObjectOfType<AudioManager>().Stop("Moving");
+                LevelCompleted();
+            }
         }
         if (GameObject.FindWithTag("Player") == null)
         {
+            FindObjectOfType<AudioManager>().Stop("NotMoving");
+            FindObjectOfType<AudioManager>().Stop("Moving");
             StartCoroutine(GameOver());
         }
     }
     private void LevelCompleted()
     {
-        SceneManager.LoadScene("Score");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     IEnumerator RevealStageNumber()
@@ -89,5 +100,10 @@ public class GamePlayManager : MonoBehaviour
         }
         MasterTracker.stageCleared = false;
         LevelCompleted();
+    }
+    IEnumerator WaitFor(float time)
+    {
+        yield return new WaitForSeconds(time);
+        waitForDone = true;
     }
 }

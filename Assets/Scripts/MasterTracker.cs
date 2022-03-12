@@ -7,6 +7,10 @@ public class MasterTracker : MonoBehaviour
 {
     static MasterTracker instance = null; // static variable in which MasterTracker will be stored
 
+    public HealthBarScript UIhealth;
+
+
+
     [SerializeField]
     int smallTankPoints = 100, fastTankPoints = 200, bigTankPoints = 300; // how much points you get per kill per enemy tank
     // public get variable functions
@@ -19,6 +23,7 @@ public class MasterTracker : MonoBehaviour
     public static int playerScore = 0;
 
     public static bool stageCleared = false;
+    public int playerHpLeft = 200;
 
     private void Awake()
     {
@@ -36,6 +41,24 @@ public class MasterTracker : MonoBehaviour
     private void Start()
     {
         FindObjectOfType<AudioManager>().Play("LevelIntro"); //Plays level intro
+        SetHpMax(playerHpLeft);
+
     }
+    public void SetHpMax(int hp)
+    {
+        UIhealth.SetMaxHealth(hp);
+    }
+
+    public void SetHp(int hp)
+    {
+        playerHpLeft = hp;
+        UIhealth.SetHealth(hp);
+    }
+
+    public int GetHp()
+    {
+        return playerHpLeft;
+    }
+
 
 }

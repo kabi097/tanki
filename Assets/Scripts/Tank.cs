@@ -10,9 +10,10 @@ public class Tank : MonoBehaviour, IKillable, IDamageble
 
     public GameObject body;
 
-
+    public GameObject HpRegen;
 
     public int health = 200;
+    public int maxHealth;
 
     public SpriteRenderer sprite;
 
@@ -47,8 +48,15 @@ public class Tank : MonoBehaviour, IKillable, IDamageble
 
             if (gameObject.name == "Player")
             {
-                StartCoroutine(Cshake.Shake(0.05f, 0.3f));
-                FindObjectOfType<AudioManager>().Play("BigHit"); //Plays moving sfx
+                if (damage < 0)
+                {
+                    StartCoroutine(Cshake.Shake(0.05f, 0.3f));
+                    FindObjectOfType<AudioManager>().Play("BigHit"); //Plays moving sfx
+                }
+                else
+                {
+                    FindObjectOfType<AudioManager>().Play("HpGot");
+                }
             }
             else
             {
@@ -63,7 +71,9 @@ public class Tank : MonoBehaviour, IKillable, IDamageble
                 alreadyDead = true;
                 FindObjectOfType<AudioManager>().Play("Destroyed"); //Plays moving sfx
                 ExplosionParticles.Play();
+                
                 StartCoroutine(FadeOut());
+                if (gameObject.name != "Player" && Random.value < 0.05f) Instantiate(HpRegen, transform.position, Quaternion.Euler(0, 0, 0));
                 StartCoroutine(WaitForEffects());
 
             }

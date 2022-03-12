@@ -7,6 +7,8 @@ public class Enemy : Tank
     float elapsed = 0f;
 
 
+  
+
     public GameObject bulletPrefabEnemy;
     public float shootingSpeed = 2f;
     public float shootingRangeSpeed = 0.5f;
@@ -16,7 +18,8 @@ public class Enemy : Tank
 
     private void Start()
     {
-        healthBar.SetMaxHealth(health);
+        maxHealth = health;
+        healthBar.SetMaxHealth(maxHealth);
     }
     public bool IsAlreadyDead()
     {
@@ -25,6 +28,10 @@ public class Enemy : Tank
     // public GameObject deathEffect;
     private void Update() 
     {
+        if (health > maxHealth)
+        {
+            health = maxHealth;
+        }
         elapsed += Time.deltaTime;
         if(elapsed >= 0.1f && shooted && doubleShotEnable)
         {

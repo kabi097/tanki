@@ -99,7 +99,9 @@ MonoBehaviour:
   firePoint: {fileID: 2967197731970724501}
   bulletPrefab: {fileID: 5184484176627929359, guid: 3af8ee511da4b0a8f8fb4d417822fc27, type: 3}
   body: {fileID: 2967197732899194161}
+  HpRegen: {fileID: 6471728281893070050, guid: b398453901ddaa54d8e8cc6bae702b16, type: 3}
   health: 250
+  maxHealth: 0
   sprite: {fileID: 2967197732899194167}
   healthBar: {fileID: 2808295261432263938}
   Cshake: {fileID: 0}
