@@ -11,6 +11,8 @@ public class Tank : MonoBehaviour, IKillable, IDamageble
     public GameObject body;
 
     public GameObject HpRegen;
+    public GameObject PowerRiser;
+
 
     public int health = 200;
     public int maxHealth;
@@ -73,7 +75,7 @@ public class Tank : MonoBehaviour, IKillable, IDamageble
                 ExplosionParticles.Play();
                 
                 StartCoroutine(FadeOut());
-                if (gameObject.name != "Player" && Random.value < 0.05f) Instantiate(HpRegen, transform.position, Quaternion.Euler(0, 0, 0));
+                if (gameObject.name != "Player" && Random.value < 0.95f) Instantiate(PowerRiser, transform.position, Quaternion.Euler(0, 0, 0));
                 StartCoroutine(WaitForEffects());
 
             }

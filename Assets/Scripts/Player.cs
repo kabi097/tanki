@@ -14,7 +14,9 @@ public class Player : Tank, IKillable, IDamageble // Inherits from the Movement 
     public int speed = 5;
     protected bool isMoving = false; // Flag to ensure that the movement before has stopped and new one can be started
 
-    public float fireTimer = 3.0f;
+    public float fireTimer = 4.0f;
+
+    int powerLevel = 0;
 
     private bool canFire = true;
     
@@ -25,6 +27,7 @@ public class Player : Tank, IKillable, IDamageble // Inherits from the Movement 
         healthBar.SetMaxHealth(maxHealth);
         health = masterTracker.GetHp();
         masterTracker.SetHpMax(maxHealth);
+        powerLevel = masterTracker.GetPower();
         rb2d = GetComponent<Rigidbody2D>(); // Gets current object rigidbody2d element
         FindObjectOfType<AudioManager>().Play("NotMoving"); //Plays not moving sfx
     }
@@ -37,7 +40,7 @@ public class Player : Tank, IKillable, IDamageble // Inherits from the Movement 
             health = maxHealth;
         }
         masterTracker.SetHp(health);
-
+        masterTracker.SetPower(powerLevel);
         if (!alreadyDead)
         {
             h = Input.GetAxisRaw("Horizontal");
@@ -50,6 +53,10 @@ public class Player : Tank, IKillable, IDamageble // Inherits from the Movement 
                     FindObjectOfType<AudioManager>().Play("Shot"); //Plays moving sfx
                     Shoot();
                     canFire = false;
+                    if(powerLevel == 3)
+                    {
+                        StartCoroutine(SecondShoot());
+                    }
                     StartCoroutine(FireEnable());
 
                 }
@@ -166,10 +173,28 @@ public class Player : Tank, IKillable, IDamageble // Inherits from the Movement 
 
         isMoving = false;
     }
-
+    public void PowerUp()
+    {
+        if(powerLevel < 3)
+        {
+            fireTimer -= 0.25f;
+            powerLevel++;
+        }
+        else
+        {
+            powerLevel = 3;
+        }
+    }
     IEnumerator FireEnable()
     {
         yield return new WaitForSeconds(fireTimer);
         canFire = true;
+    }
+
+    IEnumerator SecondShoot()
+    {
+        yield return new WaitForSeconds(0.075f);
+        FindObjectOfType<AudioManager>().Play("Shot"); //Plays moving sfx
+        Shoot();
     }
 }

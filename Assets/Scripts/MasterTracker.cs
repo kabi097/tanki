@@ -24,6 +24,7 @@ public class MasterTracker : MonoBehaviour
 
     public static bool stageCleared = false;
     public int playerHpLeft = 200;
+    public int playerPowerLevel = 0;
 
     private void Awake()
     {
@@ -54,11 +55,19 @@ public class MasterTracker : MonoBehaviour
         playerHpLeft = hp;
         UIhealth.SetHealth(hp);
     }
-
     public int GetHp()
     {
         return playerHpLeft;
     }
+    public int GetPower()
+    {
+        return playerPowerLevel;
+    }
+    public void SetPower(int power)
+    {
+        playerPowerLevel = power;
+    }
+
 
 
 }
