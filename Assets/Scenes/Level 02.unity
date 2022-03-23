@@ -747,17 +747,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 070210ee8c909af41be916d0bee9fa58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1050361738 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2759690078937186093, guid: 4f26d596be2455047a2bb8d93bf39fd9, type: 3}
-  m_PrefabInstance: {fileID: 1050361736}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa9e6f6a6cd9e234a9841e0db86896fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1056878099
 GameObject:
   m_ObjectHideFlags: 0
@@ -6105,6 +6094,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 5184484176627929359, guid: 3af8ee511da4b0a8f8fb4d417822fc27, type: 3}
   body: {fileID: 248661697}
   HpRegen: {fileID: 6471728281893070050, guid: b398453901ddaa54d8e8cc6bae702b16, type: 3}
+  PowerRiser: {fileID: 0}
   health: 200
   maxHealth: 0
   sprite: {fileID: 248661699}
@@ -6113,10 +6103,9 @@ MonoBehaviour:
   GPmanager: {fileID: 775021915}
   ExplosionParticles: {fileID: 1941848010}
   canvas: {fileID: 2013407705}
-  UIhealth: {fileID: 1050361738}
   masterTracker: {fileID: 1050361737}
   speed: 3
-  fireTimer: 0.6
+  fireTimer: 1
 --- !u!4 &1953153662
 Transform:
   m_ObjectHideFlags: 0

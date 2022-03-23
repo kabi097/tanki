@@ -46,7 +46,7 @@ public class Player : Tank, IKillable, IDamageble // Inherits from the Movement 
             h = Input.GetAxisRaw("Horizontal");
             v = Input.GetAxisRaw("Vertical");
 
-            if (Input.GetButtonDown("Fire1") && GPmanager.can_move)
+            if (Input.GetButton("Fire1") && GPmanager.can_move)
             {
                 if (canFire)
                 {
@@ -177,7 +177,7 @@ public class Player : Tank, IKillable, IDamageble // Inherits from the Movement 
     {
         if(powerLevel < 3)
         {
-            fireTimer -= 0.25f;
+            //fireTimer -= 0.25f;
             powerLevel++;
         }
         else
@@ -187,7 +187,7 @@ public class Player : Tank, IKillable, IDamageble // Inherits from the Movement 
     }
     IEnumerator FireEnable()
     {
-        yield return new WaitForSeconds(fireTimer);
+        yield return new WaitForSeconds(fireTimer-powerLevel*0.15f);
         canFire = true;
     }
 

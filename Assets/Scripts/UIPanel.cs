@@ -11,6 +11,11 @@ public class UIPanel : MonoBehaviour
     [SerializeField]
     Text enemyLeftNumber;
 
+    [SerializeField]
+    Text powerValueText;
+
+    public MasterTracker mtracker;
+
 
 
     // Start is called before the first frame update
@@ -25,5 +30,9 @@ public class UIPanel : MonoBehaviour
         int enemyLeft;
         enemyLeft = GameObject.FindGameObjectsWithTag("Enemy").Length;
         enemyLeftNumber.text = enemyLeft.ToString();
+
+        if (mtracker.GetPower() == 3) powerValueText.text = "MAX";
+        else powerValueText.text = mtracker.GetPower().ToString();
+
     }
 }
