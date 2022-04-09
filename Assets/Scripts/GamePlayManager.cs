@@ -99,7 +99,7 @@ public class GamePlayManager : MonoBehaviour
             yield return null;
         }
         MasterTracker.stageCleared = false;
-        LevelCompleted();
+        //SceneManager.LoadScene("Level 00"); // return to title screen
     }
     IEnumerator WaitFor(float time)
     {

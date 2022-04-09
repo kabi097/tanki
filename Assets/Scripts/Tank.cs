@@ -75,7 +75,13 @@ public class Tank : MonoBehaviour, IKillable, IDamageble
                 ExplosionParticles.Play();
                 
                 StartCoroutine(FadeOut());
-                if (gameObject.name != "Player" && Random.value < 0.95f) Instantiate(PowerRiser, transform.position, Quaternion.Euler(0, 0, 0));
+
+                
+                if (gameObject.name != "Player" && Random.value > 0.70f) //spawn item when ded
+                {
+                    if(Random.value > 0.75f) Instantiate(PowerRiser, transform.position, Quaternion.Euler(0, 0, 0));
+                    else Instantiate(HpRegen, transform.position, Quaternion.Euler(0, 0, 0));
+                }
                 StartCoroutine(WaitForEffects());
 
             }

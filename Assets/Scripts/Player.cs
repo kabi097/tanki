@@ -29,7 +29,7 @@ public class Player : Tank, IKillable, IDamageble // Inherits from the Movement 
         masterTracker.SetHpMax(maxHealth);
         powerLevel = masterTracker.GetPower();
         rb2d = GetComponent<Rigidbody2D>(); // Gets current object rigidbody2d element
-        FindObjectOfType<AudioManager>().Play("NotMoving"); //Plays not moving sfx
+        //FindObjectOfType<AudioManager>().Play("NotMoving"); //Plays not moving sfx
     }
 
     // Update is called once per frame

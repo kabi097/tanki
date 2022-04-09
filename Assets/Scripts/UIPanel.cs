@@ -18,15 +18,12 @@ public class UIPanel : MonoBehaviour
 
 
 
-    // Start is called before the first frame update
-    void Start()
-    {
-         stageNumber.text = SceneManager.GetActiveScene().name;
-    }
+   
 
     // Update is called once per frame
     void Update()
     {
+        stageNumber.text = SceneManager.GetActiveScene().name;
         int enemyLeft;
         enemyLeft = GameObject.FindGameObjectsWithTag("Enemy").Length;
         enemyLeftNumber.text = enemyLeft.ToString();

@@ -1,0 +1,107 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &348022386487824836
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 348022386487824826}
+  - component: {fileID: 348022386487824837}
+  m_Layer: 0
+  m_Name: AudioManager 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &348022386487824826
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 348022386487824836}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &348022386487824837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 348022386487824836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d454507cc90a14848b70d6ddc6f3b5fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: LevelIntro
+    clip: {fileID: 8300000, guid: f5a3c58bd17701a408621794ef1e5c65, type: 3}
+    volume: 0.194
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Moving
+    clip: {fileID: 8300000, guid: bb4547b12a2dc5544bc90a0d6cfed265, type: 3}
+    volume: 0.319
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: NotMoving
+    clip: {fileID: 8300000, guid: 880154ee893c42e4bb927527285c107d, type: 3}
+    volume: 0.254
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: BlockSmash
+    clip: {fileID: 8300000, guid: 827c0a858820367458799bae479d264a, type: 3}
+    volume: 0.353
+    pitch: 0.75
+    loop: 0
+    source: {fileID: 0}
+  - name: LowHit
+    clip: {fileID: 8300000, guid: 5d34f4fae5e201c4dab861ccc226bac7, type: 3}
+    volume: 0.353
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: BigHit
+    clip: {fileID: 8300000, guid: 1a0c375b89064544a80acbf6be82a06e, type: 3}
+    volume: 0.353
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Destroyed
+    clip: {fileID: 8300000, guid: ea9bdfa0796bb734d901df5290f10cfc, type: 3}
+    volume: 0.353
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: WallHit
+    clip: {fileID: 8300000, guid: 429cabbf212363049bfec3bb18015f35, type: 3}
+    volume: 0.078
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Shot
+    clip: {fileID: 8300000, guid: f07f6eb75c51bf647b8fc28c4c43424d, type: 3}
+    volume: 0.24
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: HpGot
+    clip: {fileID: 8300000, guid: 2b17cb68a6c8cc84a8bae0b83b8cd695, type: 3}
+    volume: 0.322
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}

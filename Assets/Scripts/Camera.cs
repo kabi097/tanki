@@ -8,6 +8,9 @@ public class Camera : MonoBehaviour
     public Transform player;
     public Vector3 offset;
     public float smoothSpeed = 5f;
+    public bool titleScreen = false;
+
+    float time = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -25,5 +28,13 @@ public class Camera : MonoBehaviour
             Vector3 smoothedPos = Vector3.Lerp(transform.position, desiredPos, smoothSpeed * Time.deltaTime) ;
             transform.position = smoothedPos;
         }
+        else if(titleScreen)
+        {
+            time += Time.deltaTime/2;
+            Vector3 desiredPos = new Vector3(Mathf.Sin(time)*1.1f + 2, Mathf.Cos(time+Mathf.PI)*1.2f +1, transform.position.z);
+            Vector3 smoothedPos = Vector3.Lerp(transform.position, desiredPos, smoothSpeed * Time.deltaTime);
+            transform.position = smoothedPos;
+        }
+        
     }
 }
