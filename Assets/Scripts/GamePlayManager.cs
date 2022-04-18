@@ -10,7 +10,7 @@ public class GamePlayManager : MonoBehaviour
     [SerializeField]
     Image topCurtain, bottomCurtain, blackCurtain;
     [SerializeField]
-    Text stageNumberText, gameOverText;
+    Text stageNumberText, gameOverText, pauseText;
     [SerializeField]
     RectTransform canvas;
 
@@ -18,20 +18,30 @@ public class GamePlayManager : MonoBehaviour
 
     public bool can_move = false;
 
+    public bool credits = false;
+
     bool waitForDone = false;
+
+    bool cutsceneEnd = false;
 
     // Start is called before the first frame update
     void Start()
     {
         stageNumberText.text = SceneManager.GetActiveScene().name;
+        pauseText.enabled = false;
+        if(credits)
+        {
+            stageNumberText.enabled = false;
+        }
         StartCoroutine(StartStage());
     }
 
     private void Update()
     {
-        if (GameObject.FindWithTag("Enemy") == null)
+  
+        if (GameObject.FindWithTag("Enemy") == null && !credits)
         {
-            MasterTracker.stageCleared = true;
+
             StartCoroutine(WaitFor(2.0f));
             if (waitForDone)
             {
@@ -41,17 +51,33 @@ public class GamePlayManager : MonoBehaviour
                 LevelCompleted();
             }
         }
-        if (GameObject.FindWithTag("Player") == null)
+        else if (FindObjectOfType<Player>().isAlreadyDead() && !credits)
         {
             FindObjectOfType<AudioManager>().Stop("NotMoving");
             FindObjectOfType<AudioManager>().Stop("Moving");
             StartCoroutine(GameOver());
         }
+        else if (Input.GetKeyDown(KeyCode.Return) && cutsceneEnd && !credits)
+        {
+            if (can_move)
+            {
+                can_move = false;
+                pauseText.enabled = true;
+            }
+            else
+            {
+                can_move = !can_move;
+                pauseText.enabled = false;
+            }
+            FindObjectOfType<AudioManager>().Play("Pause");
+        }
     }
     private void LevelCompleted()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+
 
     IEnumerator RevealStageNumber()
     {
@@ -80,6 +106,7 @@ public class GamePlayManager : MonoBehaviour
             yield return null;
         }
         can_move = true;
+        cutsceneEnd = true;
     }
     IEnumerator StartStage()
     {
@@ -98,12 +125,20 @@ public class GamePlayManager : MonoBehaviour
             gameOverText.rectTransform.localPosition = new Vector3(gameOverText.rectTransform.localPosition.x, gameOverText.rectTransform.localPosition.y + 1f * Time.deltaTime, gameOverText.rectTransform.localPosition.z);
             yield return null;
         }
-        MasterTracker.stageCleared = false;
-        //SceneManager.LoadScene("Level 00"); // return to title screen
+
+        //FindObjectOfType<MasterTracker>().SetHp(200);
+        //FindObjectOfType<MasterTracker>().SetPower(0);
+        //FindObjectOfType<AudioManager>().destroyObject();
+        SceneManager.LoadScene("MainMenu"); // return to title screen
     }
     IEnumerator WaitFor(float time)
     {
         yield return new WaitForSeconds(time);
         waitForDone = true;
+    }
+
+    public bool isMoveEnabled()
+    {
+        return can_move;
     }
 }

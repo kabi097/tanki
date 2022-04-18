@@ -16,6 +16,7 @@ public class Player : Tank, IKillable, IDamageble // Inherits from the Movement 
 
     public float fireTimer = 4.0f;
 
+
     int powerLevel = 0;
 
     private bool canFire = true;
@@ -175,7 +176,8 @@ public class Player : Tank, IKillable, IDamageble // Inherits from the Movement 
     }
     public void PowerUp()
     {
-        if(powerLevel < 3)
+        FindObjectOfType<AudioManager>().Play("HpGot");
+        if (powerLevel < 3)
         {
             //fireTimer -= 0.25f;
             powerLevel++;
@@ -184,6 +186,11 @@ public class Player : Tank, IKillable, IDamageble // Inherits from the Movement 
         {
             powerLevel = 3;
         }
+    }
+
+    public bool isAlreadyDead()
+    {
+        return alreadyDead;
     }
     IEnumerator FireEnable()
     {

@@ -16,7 +16,7 @@ public class Bullet : MonoBehaviour
     [SerializeField]
     public float speed = 20f;
 
-    GamePlayManager GPM;
+
 
     GameObject brickGameObject, steelGameObject;
     Tilemap tilemap;
@@ -28,7 +28,9 @@ public class Bullet : MonoBehaviour
         brickGameObject = GameObject.FindGameObjectWithTag("Brick");
         steelGameObject = GameObject.FindGameObjectWithTag("Steel");
     }
-    
+
+
+
 
     void OnCollisionEnter2D(Collision2D hitInfo) 
     {
@@ -47,11 +49,13 @@ public class Bullet : MonoBehaviour
 
                 Instantiate(TilesParticles, tilemap.GetCellCenterWorld(tilemap.WorldToCell(hitPosition)), Quaternion.Euler(0, 0, 0));                     
             }
-           
+            Destroy(gameObject);
+
         }
         else if (hitInfo.gameObject == steelGameObject)
         {
            FindObjectOfType<AudioManager>().Play("WallHit"); //Plays moving sfx
+           Destroy(gameObject);
         }
 
         else if (hitInfo.gameObject.GetComponent<IDamageble>() != null)

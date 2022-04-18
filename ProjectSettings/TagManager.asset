@@ -10,6 +10,7 @@ TagManager:
   - Tank
   - Tree
   - Enemy
+  - GMmanager
   layers:
   - Default
   - TransparentFX

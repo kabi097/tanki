@@ -67,9 +67,10 @@ public class AudioManager : MonoBehaviour
         return s.source.isPlaying;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void destroyObject()
     {
-        
+        Destroy(gameObject);
     }
+
+
 }

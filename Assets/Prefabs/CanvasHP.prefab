@@ -359,3 +359,4 @@ MonoBehaviour:
   slider: {fileID: 1697741573758899438}
   fill: {fileID: 1697741573090669562}
   border: {fileID: 1697741572630992611}
+  showAlways: 0

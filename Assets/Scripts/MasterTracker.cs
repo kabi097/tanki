@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 // Singleton MasterTracker that stores the essential informations throught the entire game
 public class MasterTracker : MonoBehaviour
@@ -37,11 +38,13 @@ public class MasterTracker : MonoBehaviour
         {
             Destroy(gameObject); //destroy duplicate instances
         }
+
+
     }
 
     private void Start()
     {
-        FindObjectOfType<AudioManager>().Play("LevelIntro"); //Plays level intro
+        //FindObjectOfType<AudioManager>().Play("LevelIntro"); //Plays level intro
         SetHpMax(playerHpLeft);
 
     }
@@ -68,6 +71,14 @@ public class MasterTracker : MonoBehaviour
         playerPowerLevel = power;
     }
 
-
+    private void Update()
+    {
+        if (SceneManager.GetActiveScene().name == "MainMenu" || SceneManager.GetActiveScene().name == "GameClear")
+        {
+            //Debug.Log("err");
+            Destroy(gameObject);
+            
+        }
+    }
 
 }

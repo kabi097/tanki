@@ -34,7 +34,7 @@ public class Tank : MonoBehaviour, IKillable, IDamageble
 
     public void Kill() 
     {
-        Destroy(gameObject);
+        if (gameObject.name != "Player") Destroy(gameObject);
     }
     
     public void Shoot() 

@@ -105,3 +105,9 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: Pause
+    clip: {fileID: 8300000, guid: 79d686dc7f909834691f6923ed48c64d, type: 3}
+    volume: 0.199
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
