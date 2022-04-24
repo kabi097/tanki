@@ -140,5 +140,5 @@ MonoBehaviour:
   rb: {fileID: 1661406827285926711}
   ExplosionParticles: {fileID: 5670616600381583884, guid: e3eb5946bdd0d354a9f9e63530a29f05, type: 3}
   TilesParticles: {fileID: 131379652516727307, guid: 0e660319dd7ae3b4b9784a339cd4b4bb, type: 3}
-  GPmanager: {fileID: 1903664410016054, guid: 9ab71168aef607a4eabf616af5c56228, type: 3}
   speed: 10
+  GPmanager: {fileID: 1903664410016054, guid: 9ab71168aef607a4eabf616af5c56228, type: 3}

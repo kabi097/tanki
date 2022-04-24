@@ -558,6 +558,7 @@ MonoBehaviour:
   playText: {fileID: 1352277652}
   quitText: {fileID: 1976291910}
   creditsText: {fileID: 764169076}
+  webGlver: 0
 --- !u!1 &1273284490
 GameObject:
   m_ObjectHideFlags: 0
