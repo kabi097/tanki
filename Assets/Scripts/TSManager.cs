@@ -13,9 +13,6 @@ public class TSManager : MonoBehaviour
     Text quitText;
     [SerializeField]
     Text creditsText;
-	
-	[SerializeField]
-    bool webGlver;
 
 
     int state = 0;
@@ -24,44 +21,41 @@ public class TSManager : MonoBehaviour
     void Start()
     {
         FindObjectOfType<AudioManager>().Play("LevelIntro"); //Plays level intro
-		if(webGlver) quitText.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-		if(!webGlver)
-		{
-			if(Input.GetKeyDown("down") && state < 1)
-			{
-				state++;
-				FindObjectOfType<AudioManager>().Play("Shot");
-			}
-			else if(Input.GetKeyDown("up") && state > 0)
-			{
-				state--;
-				FindObjectOfType<AudioManager>().Play("Shot");
-			}
-			
-			if(state == 0)
-			{
-				playText.fontSize = 45;
-				quitText.fontSize = 35;
-				//creditsText.fontSize = 35;
-			}
-			else if (state == 1)
-			{
-				playText.fontSize = 35;
-				quitText.fontSize = 45;
-				//creditsText.fontSize = 35;
-			}
-			else if (state == 2)
-			{
-				playText.fontSize = 35;
-				quitText.fontSize = 35;
-				//creditsText.fontSize = 45;
-			}
-		}
+
+        if(Input.GetKeyDown("down") && state < 1)
+        {
+            state++;
+            FindObjectOfType<AudioManager>().Play("Shot");
+        }
+        else if(Input.GetKeyDown("up") && state > 0)
+        {
+            state--;
+            FindObjectOfType<AudioManager>().Play("Shot");
+        }
+        
+        if(state == 0)
+        {
+            playText.fontSize = 45;
+            quitText.fontSize = 35;
+            //creditsText.fontSize = 35;
+        }
+        else if (state == 1)
+        {
+            playText.fontSize = 35;
+            quitText.fontSize = 45;
+            //creditsText.fontSize = 35;
+        }
+        else if (state == 2)
+        {
+            playText.fontSize = 35;
+            quitText.fontSize = 35;
+            //creditsText.fontSize = 45;
+        }
         if(Input.GetButton("Fire1"))
         {
             if(state == 0)
